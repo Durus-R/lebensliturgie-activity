@@ -1,9 +1,8 @@
-import './style.css'
-import rocketLogo from '/rocket.png'
+// main.js
+import {createApp} from 'vue';
+import App from './App.vue';
+import {AVPlugin} from "vue-audio-visual";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <img src="${rocketLogo}" class="logo" alt="Discord" />
-    <h1>Hello, World!</h1>
-  </div>
-`;
+const app = createApp(App)
+app.use(AVPlugin)
+app.mount('#app');
