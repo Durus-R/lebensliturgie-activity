@@ -97,7 +97,7 @@ html, body {
 }
 
 body {
-  background-image: url('./.proxy/wallpaper.jpg');
+  background-image: url('./wallpaper.jpg');
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
