@@ -112,6 +112,8 @@ body {
   color: white;
   --player-background: transparent;
   --player-text-color: white;
+  --player-progress-color: orange;
+  --player-buffered-color: orange;
 }
 
 .player {
