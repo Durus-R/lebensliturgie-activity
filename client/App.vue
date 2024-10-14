@@ -24,18 +24,15 @@
 
 <script setup>
 import {computed, onMounted, ref} from 'vue';
-import {discordSdk} from "@discord/embedded-app-sdk";
 import axios from 'axios';
 import {parse} from 'node-html-parser';
 
-import {AVWaveform} from "vue-audio-visual";
 import {VueSound} from 'vue-sound';
 import {patchUrlMappings} from "@discord/embedded-app-sdk";
 
 const audioSrcLink = ref("")
 const audioSrc = ref('');
-const count = ref(0);
-const msg = ref('Hello, World!');
+
 const g_error = ref('');
 
 const title = computed(() => `Lebensliturgie für den ${new Date().toLocaleDateString()}`);
