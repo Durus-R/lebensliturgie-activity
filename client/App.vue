@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <h1>Lebensliturgien für den {{ new Date().toLocaleDateString() }}</h1>
-    <h2>Aktuell in der Alpha-Phase. Nicht verbunden mit lebensliturgien.de</h2>
+    <h2>Wir danken Herrn Steinbach für die freundliche Genehmigung.</h2>
     <!-- <AVWaveform v-if="audioSrc" :line-width="2" line-color="lime" :src="audioSrc"></AVWaveform>-->
     <br/>
     <div class="player">
       <VueSound v-if="audioSrc"
                 :title="title"
-                :detais="variation"
+                :details="variation"
                 :file="audioSrc"
                 :showSkip="false"
       />
@@ -104,7 +104,7 @@ body {
 }
 
 #app {
-  margin-top: 18rem;
+  margin-top: 8rem;
   text-align: center;
   color: white;
   --player-background: transparent;
