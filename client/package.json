@@ -16,8 +16,12 @@
   "dependencies": {
     "@discord/embedded-app-sdk": "^1.5.0",
     "@vitejs/plugin-vue": "^5.1.4",
+    "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
+    "daisyui": "^4.12.13",
     "node-html-parser": "^6.1.13",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
     "vue": "^3.5.12",
     "vue-sound": "^0.1.10"
   }

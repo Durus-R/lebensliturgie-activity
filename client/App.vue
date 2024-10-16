@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Lebensliturgien für den {{ new Date().toLocaleDateString() }}</h1>
+    <br/>
     <h2>Wir danken Herrn Steinbach für die freundliche Genehmigung.</h2>
     <!-- <AVWaveform v-if="audioSrc" :line-width="2" line-color="lime" :src="audioSrc"></AVWaveform>-->
     <br/>
@@ -10,6 +11,7 @@
                 :details="variation"
                 :file="audioSrc"
                 :showSkip="false"
+                ref="player"
       />
     </div>
     <h3 v-if="!audioSrc">Loading...</h3>
@@ -19,25 +21,33 @@
       <button type="button" @click="count++">count is {{ count }}</button>
     </div>-->
     {{ g_error }}
+    <button class="btn" @click="btn_click()">{{ playing ? "Pause" : "Start"}}</button>
   </div>
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from 'vue';
+import {computed, onMounted, ref, watch} from 'vue';
 import axios from 'axios';
 import {parse} from 'node-html-parser';
 
 import {VueSound} from 'vue-sound';
 import {patchUrlMappings} from "@discord/embedded-app-sdk";
 
+const playing = ref(false);
 const audioSrcLink = ref("")
 const audioSrc = ref('');
 
+
 const g_error = ref('');
+const player = ref(null)
 
 const title = computed(() => `Lebensliturgie für den ${new Date().toLocaleDateString()}`);
 const variation = ref("Tagesgebet")
 
+
+function btn_click() {
+    player.value.togglePlay()
+}
 async function downloadLlMp3() {
   const day = new Date().getDay();
   const dayMap = {
@@ -81,12 +91,19 @@ onMounted(async () => {
 
   const blob = new Blob([arrayBuffer], {type: "audio/wav"});
   audioSrc.value = window.URL.createObjectURL(blob);
+  watch(()=> {
+    if(player.value){
+      return player.value.playing
+    }
+  }, (newVal) => {
+    playing.value = newVal
+  })})
 
-});
 </script>
 
-<style>
-@import "./player.css";
+<style lang="scss">
+@import "vue-sound/style.css";
+@import "style.css";
 
 html, body {
   height: 100%;
@@ -94,7 +111,7 @@ html, body {
 }
 
 body {
-  background-image: url('./wallpaper.jpg');
+  background-image: url('./.proxy/wallpaper.jpg');
   background-repeat: repeat-x;
   background-size: cover;
   background-position: center;
@@ -104,7 +121,7 @@ body {
 }
 
 #app {
-  margin-top: 8rem;
+  margin-top: 3rem;
   text-align: center;
   color: white;
   --player-background: transparent;
@@ -114,7 +131,6 @@ body {
 }
 
 .player {
-  max-width: 80%;
   align-items: center;
   margin: auto;
 }
